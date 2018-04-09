@@ -24,6 +24,7 @@ public class CglibProxyFactory {
                 method.invoke(obj, args);
                 System.out.println("Ending...");
                 System.out.println(proxy.getClass());
+//                System.out.println(proxy); //Exception throws here
                 return proxy;
             }
         });

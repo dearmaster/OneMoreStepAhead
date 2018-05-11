@@ -1,21 +1,24 @@
 package com.master.demo.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
+/**
+ * many-2-many  Entitlement - Group
+ */
 @Entity
-@Table(name="demo_employee")
-public class Employee {
+@Table(name = "t_demo_cascade_entitlement")
+public class Entitlement {
 
     @Id
-    @Basic(optional = false)
+    @Basic
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name", unique = true, nullable = false, length = 10)
+    @Column(unique = true, nullable = false, length = 20)
     private String name;
 
-    public Employee(String name) {
-        this.name = name;
-    }
+    @Transient
+    private Set<Group> groups;
 
     public Integer getId() {
         return id;
@@ -33,12 +36,11 @@ public class Employee {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public Set<Group> getGroups() {
+        return groups;
     }
 
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
 }

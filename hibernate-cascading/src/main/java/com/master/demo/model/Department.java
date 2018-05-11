@@ -1,21 +1,24 @@
 package com.master.demo.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
+/**
+ * one-2-many   User - Department
+ */
 @Entity
-@Table(name="demo_employee")
-public class Employee {
+@Table(name = "t_demo_cascade_department")
+public class Department {
 
     @Id
-    @Basic(optional = false)
+    @Basic
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name", unique = true, nullable = false, length = 10)
+    @Column(nullable = false, length = 20, unique = true)
     private String name;
 
-    public Employee(String name) {
-        this.name = name;
-    }
+    @Transient
+    private Set<User> users;
 
     public Integer getId() {
         return id;
@@ -33,12 +36,11 @@ public class Employee {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public Set<User> getUsers() {
+        return users;
     }
 
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }
